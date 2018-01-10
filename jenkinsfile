@@ -33,7 +33,7 @@ pipeline {
                             sh "npm run cucumber"
                             sh "npm run report"
                             publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'reports', reportFiles: 'cucumber_report.html', reportName: 'HTML Report', reportTitles: ''])
-                            cucumber fileIncludePattern: '**/*.json', sortingMethod: 'ALPHABETICAL'
+                            cucumber fileIncludePattern: 'reports/*.json', sortingMethod: 'ALPHABETICAL'
 
                         }
                         //step($class: 'CucumberTestResultArchiver', testResults: 'reports/cucumber_report.json')
