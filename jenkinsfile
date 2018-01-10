@@ -36,7 +36,6 @@ pipeline {
                             cucumber fileIncludePattern: 'reports/*.json', sortingMethod: 'ALPHABETICAL'
 
                         }
-                        //step($class: 'CucumberTestResultArchiver', testResults: 'reports/cucumber_report.json')
                     }
                 }
             }
