@@ -1,0 +1,46 @@
+pipeline {
+    agent{
+        label 'master'
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                echo "Checkout repos ...."
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'ui-recorder-demo']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/staekblw/ui-recorder-demo.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'phantomjs-standalone']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/staekblw/phantomjs-standalone.git']]])
+
+            }
+        }
+        stage('UI Test') {
+            steps {
+                script {
+                    nodejs = tool 'nodejs7.10.0'
+                    env.PATH = "${nodejs}/bin:" + env.PATH
+                    jdk = tool 'jdk8'
+                    env.JAVA_HOME = "${jdk}"
+                    dir("phantomjs-standalone"){
+                        script {
+                            sh "npm config set registry https://registry.npm.taobao.org"
+                            sh 'npm install'
+                            sh 'nohup node server.js&'
+                        }
+                    }
+                    dir("ui-recorder-demo") {
+                        script {
+                            sh "npm config set registry https://registry.npm.taobao.org"
+                            sh "npm install uirecorder mocha selenium-standalone -g"
+
+                            sh "npm install"
+                            sh "chmod +x run.sh"
+                            sh "npm run test"
+                            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'reports', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}
+
