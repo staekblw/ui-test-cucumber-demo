@@ -27,6 +27,7 @@ pipeline {
                     }
                     dir("ui-test-cucumber-demo") {
                         script {
+                            sh "mkdir -p reports/screenshots"
                             sh "npm config set registry https://registry.npm.taobao.org"
                             sh "npm install"
                             sh "npm run cucumber"

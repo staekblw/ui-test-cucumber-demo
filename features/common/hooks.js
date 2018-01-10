@@ -15,7 +15,7 @@ defineSupportCode(function ({After, Before}) {
 });
 
 async function takeScreen(step) {
-  var png = await driver.getScreenshot("screenshots/" + guid() + '.png');
+  var png = await driver.getScreenshot("reports/screenshots/" + guid() + '.png');
   step.attach(png, 'image/png');
 }
 
