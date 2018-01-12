@@ -5,17 +5,13 @@ const driver = require("../common/driver")
 
 
 defineSupportCode(function ({After, Before}) {
-  Before(function () {
-    //this.attach("some text");
-  });
+    Before(function () {
+        // console.log("start..........." + this._linbo)
+    });
 
-  After(async function () {
-    //await takeScreen(this)
-  });
+    After(async function () {
+        // console.log("end...........")
+        await this.dispose()
+    });
 });
-
-async function takeScreen(step) {
-  var png = await driver.getScreenshot("reports/screenshots/" + guid() + '.png');
-  step.attach(png, 'image/png');
-}
 

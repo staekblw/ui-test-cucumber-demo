@@ -5,5 +5,5 @@ Feature:设备管理
   Scenario: 创建设备
     Given 打开设备页面
     When 创建设备
-    Then 看见设备创建成功
+    Then 看见文字 "设备创建成功","恭喜您"
 
