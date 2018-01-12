@@ -3,22 +3,22 @@ const path = require('path');
 const chai = require("chai");
 const should = chai.should();
 const JWebDriver = require('jwebdriver');
+
+let config = {
+    "host": "10.45.53.21",
+    "port": "4444"
+};
+
 chai.use(JWebDriver.chaiSupportChainPromise);
 
-let sessionConfig = Object.assign({}, {
-        "webdriver": {
-            "host1": "localhost",
-            "host": "10.45.53.21",
-            "port": "4444",
-        },
-    },
+
+let sessionConfig = Object.assign({},
     {
         'ie.ensureCleanSession': true,
         'chromeOptions': {
             'args': ['--enable-automation']
         }
     });
-
 
 let timeOutOptions = {
     pageloadTimeout: 30000, // page onload timeout
@@ -28,7 +28,9 @@ let timeOutOptions = {
 
 const driver = {
     browser: function () {
-        return new JWebDriver()
+        return new JWebDriver(
+            config
+        )
             .session(sessionConfig)
             .maximize()
             .config(timeOutOptions);
