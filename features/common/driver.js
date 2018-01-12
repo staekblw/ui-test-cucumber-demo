@@ -7,7 +7,8 @@ chai.use(JWebDriver.chaiSupportChainPromise);
 
 let sessionConfig = Object.assign({}, {
         "webdriver": {
-            "host": "localhost",
+            "host1": "localhost",
+            "host": "10.45.53.21",
             "port": "4444",
         },
     },

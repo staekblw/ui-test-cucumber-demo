@@ -4,6 +4,7 @@ Given('打开设备页面', async function () {
     await this.do(() => {
         this.indexPage.open()
     })
+
 })
 
 When('创建设备', async function () {
