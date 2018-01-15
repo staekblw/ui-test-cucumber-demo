@@ -41,10 +41,12 @@ pipeline {
     post{
             always{
                 script{
-                    echo "test"
-                    sh "npm run report||true"
-                    publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'reports', reportFiles: 'cucumber_report.html', reportName: 'HTML Report', reportTitles: ''])
-                    cucumber fileIncludePattern: 'reports/*.json', sortingMethod: 'ALPHABETICAL'
+                    dir("ui-test-cucumber-demo") {
+                        echo "test"
+                        sh "npm run report||true"
+                        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'reports', reportFiles: 'cucumber_report.html', reportName: 'HTML Report', reportTitles: ''])
+                        cucumber fileIncludePattern: 'reports/*.json', sortingMethod: 'ALPHABETICAL'
+                    }
                 }
             }
     }
