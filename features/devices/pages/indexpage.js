@@ -8,7 +8,7 @@ class IndexPage extends BasePage {
     async open() {
         let url = `http://baidu.com`;
         await this.browser.url(url);
-        throw "error"
+        // throw "error"
         await this.browser.sleep(500).wait('body', 30000).html().then((code) => {
             this.isPageError(code).should.be.false;
         });
