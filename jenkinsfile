@@ -31,12 +31,18 @@ pipeline {
                             sh "npm config set registry https://registry.npm.taobao.org"
                             sh "npm install"
                             sh "npm run cucumber"
-                            sh "npm run report"
+                            sh "npm run report||true"
                             publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'reports', reportFiles: 'cucumber_report.html', reportName: 'HTML Report', reportTitles: ''])
                             cucumber fileIncludePattern: 'reports/*.json', sortingMethod: 'ALPHABETICAL'
-
                         }
                     }
+                }
+            }
+        }
+        post{
+            always{
+                script{
+                    echo "test"
                 }
             }
         }
