@@ -2,7 +2,7 @@ const {Given, When, Then, And} = require('cucumber')
 
 Given(/^打开设备页面$/, async function () {
     await this.indexPage.open("this is url")
-    throw "erorr"
+    // throw "erorr"
 })
 
 When('创建设备', async function () {

@@ -3,6 +3,11 @@ class BasePage {
         this._browser = browser;
     }
 
+    async click(selector) {
+        await this.browser.sleep(300).wait(selector, 30000)
+            .sleep(300).click(0);
+    }
+
     get browser() {
         return this._browser;
     }
