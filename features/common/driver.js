@@ -5,7 +5,8 @@ const should = chai.should();
 const JWebDriver = require('jwebdriver');
 
 let config = {
-    "host": "10.45.53.21",
+    // "host": "10.45.53.21",
+    "host": "localhost",
     "port": "4444"
 };
 

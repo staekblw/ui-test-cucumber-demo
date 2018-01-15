@@ -1,16 +1,14 @@
 const {defineSupportCode} = require('cucumber')
 
-const guid = require("../common/guid")
-const driver = require("../common/driver")
-
-
 defineSupportCode(function ({After, Before}) {
     Before(function () {
-        // console.log("start..........." + this._linbo)
     });
 
-    After(async function () {
-        // console.log("end...........")
+    After(async function (senario) {
+        // console.log(senario)
+        if (senario.result.status === "failed") {
+            await this.takeScreen();
+        }
         await this.dispose()
     });
 });

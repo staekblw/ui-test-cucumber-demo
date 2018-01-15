@@ -32,16 +32,10 @@ class CustomWorld {
         this._browser.close();
     }
 
-    async do(fun) {
-        await this.attach(fun.toString());
-        await fun();
-        await this.takeScreen();
-    }
-
     async takeScreen() {
         let screenFile = "reports/screenshots/" + guid() + '.png';
-        var png = await this._browser.getScreenshot(screenFile);
-        await this.attach(png, 'image/png');
+        let png = await this._browser.getScreenshot(screenFile);
+        return this.attach(png, 'image/png');
     }
 }
 
