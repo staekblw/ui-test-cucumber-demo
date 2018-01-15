@@ -39,14 +39,14 @@ pipeline {
                 }
             }
         }
-        post{
+
+    }
+    post{
             always{
                 script{
                     echo "test"
                 }
             }
-        }
     }
-
 }
 
